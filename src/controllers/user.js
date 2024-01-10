@@ -14,7 +14,12 @@ const followUser = async (req, res) => {
       throw new Error('User not found');
     }
 
-    currentUser.followers.push(userToFollow._id);
+    const alreadyFollowing = currentUser.following.includes(userToFollow._id);
+    if(alreadyFollowing){
+      throw new Error('You are already following this user');
+    }
+
+    currentUser.following.push(userToFollow._id);
     await currentUser.save();
 
     res.send({ message: 'You are now following the user' });
@@ -25,7 +30,7 @@ const followUser = async (req, res) => {
 
 const getFollowerCount = async function (req, res) {
   try {
-    const count = await User.countDocuments({ followers: req.user._id });
+    const count = await User.countDocuments({ following: req.user._id });
     res.send({ count });
   } catch(error){
     res.status(400).send(error.message);

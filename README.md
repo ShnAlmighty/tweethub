@@ -50,7 +50,7 @@ POST /auth/login
 | `password` | `string` | **Required**. Password of the user |
 
 #### Send Message
-This will be used to send a message on feed
+This will be used to send a message by the logged in user to the feed
 
 ```http
 POST /message/postmessage
@@ -108,7 +108,7 @@ POST /user/follow/:id
 | `id` | `string` | **Required**. The ID of the user to be followed |
 
 #### Get Followers Count
-This will be used to fetch the message feed for the logged in user
+This will be used to fetch the number of users who follow the logged in user
 
 ```http
 GET /users/followers

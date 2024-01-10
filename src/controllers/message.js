@@ -18,7 +18,7 @@ const getMyFeed = async (req, res) => {
     const page = req.query.page || 1;
     const limit = req.query.limit || 10;
 
-    const userFeed = await Message.find({ author: { $in: [user._id, ...user.followers] } })
+    const userFeed = await Message.find({ author: { $in: [user._id, ...user.following] } })
       .sort('-timestamp')
       .skip((page - 1) * limit)
       .limit(limit)
